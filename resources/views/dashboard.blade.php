@@ -1,8 +1,12 @@
 @extends('layouts.main')
 
 @section('content')
-<div>
-    <h2>Почта подтверждена.</h2>
-</div>
+<div class="cart-main-area pt-95 pb-100">
+    <div class="container">
+    <div class="alert alert-success" role="alert">
+        Почта подтверждена.
+    </div>
+    </div>
+</div> 
 @endsection
 

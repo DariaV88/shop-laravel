@@ -51,6 +51,7 @@
               </div>
               <!-- /.card-body -->
             </div>
+            {!! $orders->links('pagination::bootstrap-4') !!}
             <!-- /.card -->
           </div>
        </div>

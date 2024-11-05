@@ -7,8 +7,7 @@
             <div class="container">
                 <h3 class="page-title">Корзина</h3>
                 <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                        <form action="#">
+                    <div>
                             <div class="table-content table-responsive">
                                 <table>
                                     <thead>
@@ -18,28 +17,35 @@
                                             <th>Цена</th>
                                             <th>Кол-во</th>
                                             <th>Стоимость</th>
-                                            <th>Удалить</th>
+                                            <th>Изменить кол-во</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach($order->products as $product)
                                         <tr>
                                             <td class="product-thumbnail">
-                                                <a href="#"><img src="assets/img/cart/cart-3.jpg" alt=""></a>
+                                                <a href="#"><img src="{{Storage::url($product->preview_image)}}" style="max-width: 150px;" alt=""></a>
                                             </td>
                                             <td class="product-name"><a href="{{route('product', [$product->category->id, $product->id])}}">{{$product->title}}</a></td>
-                                            <td class="product-price-cart"><span class="amount">${{$product->price}}</span></td>
+                                            <td class="product-price-cart"><span class="amount">{{$product->price}}</span></td>
                                             <td class="product-quantity"><span class="pl-50">{{$product->pivot->count}}</span>
                                             </td>
-                                            <td class="product-subtotal">${{$product->getTotalPrice()}}</td>
+                                            <td class="product-subtotal">{{$product->getTotalPrice()}}</td>
                                             <td class="product-remove">
-                                            <form action="{{route('basket.remove', $product)}}" method="POST">
-                                            @csrf
-                                                    <button type="submit" class="btn btn-danger">
-                                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"><i class="ti-trash"></i></span>
-                                                    </button>
-                                                </form> 
-                                                <!-- <a href="#"><i class="ti-trash"></i></a></td> -->
+                                            <div class="btn-group form-inline">
+                            <form action="{{ route('basket.remove', $product) }}" method="POST">
+                                <button type="submit" href="">-<span
+                                        class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+                                @csrf
+                            </form>
+                            <form action="{{ route('basket.add', $product) }}" method="POST">
+                                <button type="submit"
+                                        href=""> + <span
+                                        class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                @csrf
+                            </form>
+                        </div>
+                                            </td> 
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -49,13 +55,33 @@
                                 <div class="col-lg-12">
                                     <div class="cart-shiping-update-wrapper">
                                     <h5>Общая стоимость: ${{$order->getBasketTotalPrice()}}</h5>
-                                        <div class="cart-clear">
-                                            <a href="{{route('basket.checkout')}}">Оплата</a>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                    </div>
+                    <div>
+                    <div class="breadcrumb-content text-center">
+                    <h2>Checkout</h2>
+                   <p>Укажите имя и номер телефона, чтобы менеджер связался с вами.</p>
+            </div>
+
+
+            <form action="{{route('basket.confirm')}}" method="POST">
+            <div class="form-group">
+                <label for="name">Имя:</label>
+                <div class="col-lg-4">
+                    <input type="text" name="name" id="name" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Номер телефона: </label>
+                <div class="col-lg-4">
+                    <input type="text" name="phone" id="phone" class="form-control">
+                </div>
+            </div>
+            @csrf
+            <input type="submit" class="btn btn-success" value="Подтвердить заказ">
+            </form>
                     </div>
                 </div>
             </div>

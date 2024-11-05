@@ -50,6 +50,7 @@
               </div>
               <!-- /.card-body -->
             </div>
+            {!! $categories->links('pagination::bootstrap-4') !!}
             <!-- /.card -->
           </div>
        </div>

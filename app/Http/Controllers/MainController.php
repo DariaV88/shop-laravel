@@ -17,10 +17,33 @@ class MainController extends Controller
        return 1;
     }
 
-    public function category(Category $category) {
+    public function category(Category $category, Request $request) {
+
         $categories = Category::all();
         $category = Category::where('id', $category['id'])->first();
-        return view('category', compact('category', 'categories'));
+
+        $productsQuery = Product::where('category_id', $category['id']);
+
+        if($request->filled('price_from')) {
+            $productsQuery = $productsQuery->where('price', '>=', $request->price_from);
+        }
+
+        if($request->filled('price_to')) {
+            $productsQuery = $productsQuery->where('price', '<=', $request->price_to);
+        }
+
+        if($request->has('new')) {
+            $productsQuery = $productsQuery->where('new', 1);
+        }
+
+        if($request->has('hit')) {
+            $productsQuery = $productsQuery->where('hit', 1);
+        }
+
+        $productCount = $productsQuery->count();
+        $products = $productsQuery->paginate(6)->withPath("?" . ($request->getQueryString()));
+
+        return view('category', compact('category', 'categories', 'products', 'productCount'));
     }
 
     public function product(Category $category, Product $product) {

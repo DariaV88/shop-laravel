@@ -53,7 +53,6 @@ Route::middleware(['auth'])->group(function() {
 
 Route::group(['prefix' => 'basket'], function() { 
     Route::get('/', 'App\Http\Controllers\BasketController@basket')->name('basket');
-    Route::get('/checkout', 'App\Http\Controllers\BasketController@checkout')->name('basket.checkout');
     Route::post('/add/{id}', 'App\Http\Controllers\BasketController@add')->name('basket.add');
     Route::post('/remove/{id}', 'App\Http\Controllers\BasketController@remove')->name('basket.remove');
     Route::post('/confirm', 'App\Http\Controllers\BasketController@confirm')->name('basket.confirm');

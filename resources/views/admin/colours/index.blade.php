@@ -52,6 +52,7 @@
               </div>
               <!-- /.card-body -->
             </div>
+            {!! $colours->links('pagination::bootstrap-4') !!}
             <!-- /.card -->
           </div>
        </div>

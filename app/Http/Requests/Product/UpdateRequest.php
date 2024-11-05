@@ -28,6 +28,8 @@ class UpdateRequest extends FormRequest
             // 'preview_image' => 'image',
             'price' => 'numeric',
             'count' => 'numeric',
+            // 'new' => 'required',
+            // 'hit' => 'required',
         ];
     }
 }

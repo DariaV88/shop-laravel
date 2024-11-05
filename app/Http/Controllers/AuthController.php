@@ -54,7 +54,6 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return 1;
         return redirect()->route('index');
     }
 

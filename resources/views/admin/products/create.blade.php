@@ -101,6 +101,19 @@
                   </select>
                 </div>
 
+                <div class="form-check">
+  <input name="hit" class="form-check-input" type="checkbox" value="1" id="flexCheckDefault">
+  <label class="form-check-label" for="flexCheckDefault">
+    Hit
+  </label>
+</div>
+<div class="form-check">
+  <input name="new" class="form-check-input" type="checkbox" value="1" id="flexCheckChecked" checked>
+  <label class="form-check-label" for="flexCheckChecked">
+    New
+  </label>
+</div>
+
           <input type="submit" class="btn btn-primary" value="Добавить">
           </div>
         </form>

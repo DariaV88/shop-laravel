@@ -30,7 +30,7 @@ class ColourController extends Controller {
 
   public function index()
   {
-    $colours = Colour::all();
+    $colours = Colour::paginate(10);
     return view('admin.colours.index', compact('colours'));
   }
 

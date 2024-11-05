@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class BasketController extends Controller
 {
+
     public function basket() {
         $orderId = session('orderId');
         if (!is_null($orderId)){
@@ -17,12 +18,8 @@ class BasketController extends Controller
         if (!isset($order)) {
             return view('basket-empty');
         }
-
+        
         return view('basket', compact('order'));
-    }
-
-    public function checkout() {
-        return view('checkout');
     }
 
     public function add($productId) {
@@ -54,8 +51,8 @@ class BasketController extends Controller
     }
 
     public function remove($productId) {
-
         $orderId = session('orderId');
+        
         if (is_null($orderId)) {
           return redirect()->route('basket');
         }
@@ -63,15 +60,13 @@ class BasketController extends Controller
 
         if($order->products->contains($productId)) {
             $pivotRow = $order->products()->where('product_id', $productId)->first()->pivot;
-            if($pivotRow->count < 1) {
-                $order->products()->attach($productId);
+            if($pivotRow->count < 2) {
+                $order->products()->detach($productId);
             } else {
                 $pivotRow->count--;
                 $pivotRow->update();
             }
         }
-
-        $order->products()->detach($productId);
 
         return redirect()->route('basket');
     }

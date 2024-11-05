@@ -43,7 +43,7 @@ class ProductController extends Controller {
 
   public function index()
   {
-    $products = Product::all();
+    $products = Product::paginate(10);
     return view('admin.products.index', compact('products'));
   }
 
@@ -57,6 +57,7 @@ class ProductController extends Controller {
   public function store(StoreRequest $request, Product $product)
   {
     $data = $request->validated();
+
     $data['preview_image'] = Storage::disk('public')->put('/images', $data['preview_image']);
     $data['is_published'] = true;
 

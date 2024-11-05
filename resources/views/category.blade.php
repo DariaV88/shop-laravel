@@ -6,34 +6,15 @@
             <div class="container">
                 <div class="row flex-row-reverse">
                     <div class="col-lg-9">
-                        <div class="shop-topbar-wrapper">
-                            <div class="product-sorting-wrapper">
-                                <div class="product-show shorting-style">
-                                    <label>Showing <span>1-20</span> of <span>{{$category->products->count()}}</span> Results</label>
-                                    <select>
-                                        <option value="">12</option>
-                                        <option value="">24</option>
-                                        <option value="">36</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="grid-list-options">
-                                <ul class="view-mode">
-                                    <li class="active"><a href="#product-grid" data-view="product-grid"><i class="ti-layout-grid4-alt"></i></a></li>
-                                    <li><a href="#product-list" data-view="product-list"><i class="ti-align-justify"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    
-                        <h4>{{$category->title}} - {{$category->products->count()}} шт</h4>
-                        <div class="grid-list-product-wrapper">
+                        <h4>{{$category->title}} - {{$productCount}} шт</h4>
+                        <div class="grid-list-product-wrapper mt-25">
                             <div class="product-view product-grid">
                                 <div class="row">  
-                                    @foreach($category->products as $product)
+                                    @foreach($products as $product)
                                     <div class="product-width col-lg-6 col-xl-4 col-md-6 col-sm-6">
                                         <div class="product-wrapper mb-10">
                                             <div class="product-img">
-                                                <a href="product-details.html">
+                                                <a href="#">
                                                     <img src="{{Storage::url($product->preview_image)}}" alt="">
                                                 </a>
                                                 <div class="product-action p-0">
@@ -46,23 +27,20 @@
                                                         В корзину
                                                     </form>
                                                 </div>
-                                                <div class="product-action-wishlist">
-                                                    <a title="Wishlist" href="#">
-                                                        <i class="ti-heart"></i>
-                                                    </a>
-                                                </div>
                                             </div>
                                             <div class="product-content">
                                                 <h4><a href="{{route('product', [$category->id, $product->id])}}">{{$product->title}}</a></h4>
+                                                @if($product->isNew())<h4 style="color:coral">НОВИНКА</h4>@endif
+                                                @if($product->isHit())<h4 style="color:goldenrod">ХИТ</h4>@endif
                                                 <div class="product-price">
-                                                    <span class="new">{{$product->price}}$</span>
+                                                    <span class="new">{{$product->price}}</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     @endforeach
                                 </div>
-                                <div class="pagination-style text-center mt-10">
+                                <!-- <div class="pagination-style text-center mt-10">
                                     <ul>
                                         <li>
                                             <a href="#"><i class="icon-arrow-left"></i></a>
@@ -77,23 +55,62 @@
                                             <a class="active" href="#"><i class="icon-arrow-right"></i></a>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> -->
+                                {!! $products->links('pagination::bootstrap-4') !!}
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-3">
-                        <div class="shop-sidebar">
+                    <div class="shop-sidebar">
                             <div class="shop-widget">
-                                <h4 class="shop-sidebar-title">Search Products</h4>
                                 <div class="shop-search mt-25 mb-50">
                                     <form class="shop-search-form">
-                                        <input type="text" placeholder="Find a product">
+                                        <input type="text" placeholder="Поиск">
                                         <button type="submit">
                                             <i class="icon-magnifier"></i>
                                         </button>
                                     </form>
                                 </div>
                             </div>
+
+                            <form action="{{route('category', [$category])}}" method="get">
+
+                            <div class="shop-widget">
+                                <h4 class="shop-sidebar-title">Фильтрация по цене</h4>
+                                <div class="mt-15">
+                                <label for="price_from">Цена от
+                                    <input type="text" name="price_from" id="price_from" size="5" value="{{ request()->price_from}}">
+                                </label>
+                                <label for="price_to">До
+                                    <input type="text" name="price_to" id="price_to" size="5"  value="{{ request()->price_to }}">
+                                </label>
+                                </div>
+                            </div>
+
+                            <div class="shop-widget mt-50">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="new" value="new" id="flexCheckDefault"
+                                    @if(request()->has('new')) checked @endif>
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Новинки
+                                </label>
+                            </div>
+
+                            <div class="shop-widget mt-50">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="hit" value="hit" id="flexCheckDefault"
+                                    @if(request()->has('hit')) checked @endif>
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Хиты
+                                </label>
+                            </div>
+
+                            <div class="mt-50">
+                            <button type="submit" class="btn btn-primary">Отфильтровать</button> 
+                            <a href="{{route('category', [$category])}}" class="btn btn-warning">Сброс</a>
+                            </div>
+                            
+                            </form>
                         </div>
                     </div>
                 </div>

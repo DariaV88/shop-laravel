@@ -10,17 +10,17 @@
                                 <div
                                     class="slider-content slider-animated-1 pt-114"
                                 >
-                                    <h3 class="animated">
-                                        We keep pets for pleasure.
-                                    </h3>
                                     <h1 class="animated">
-                                        Food & Vitamins <br />For all Pets
+                                        Название <br /> магазина
                                     </h1>
-                                    <div class="slider-btn">
+                                    <h3 class="animated">
+                                        Новая коллекция верхней одежды
+                                    </h3>
+                                    <div class="slider-btn mt-25">
                                         <a
                                             class="animated"
-                                            href="product-details.html"
-                                            >SHOP NOW</a
+                                            href="{{route('category', [8])}}"
+                                            >За покупками</a
                                         >
                                     </div>
                                 </div>
@@ -31,7 +31,8 @@
                                 >
                                     <img
                                         class="animated"
-                                        src="assets/img/slider/slider-single-img.png"
+                                        style="max-width: 400px;"
+                                        src="{{Storage::url('images/gwslOZCYnXGT1yWi3zu5yoyTj61uzHm2fKtLczrU.jpg')}}"
                                         alt=""
                                     />
                                 </div>
@@ -39,6 +40,8 @@
                         </div>
                     </div>
                 </div>
+
+
                 <div class="single-slider pt-100 pb-100 yellow-bg">
                     <div class="container">
                         <div class="row">
@@ -47,16 +50,16 @@
                                     class="slider-content slider-animated-1 pt-114"
                                 >
                                     <h3 class="animated">
-                                        We keep pets for pleasure.
+                                        Лучшие платья сезона
                                     </h3>
                                     <h1 class="animated">
-                                        Food & Vitamins <br />For all Pets
+                                        Название <br /> магазина
                                     </h1>
                                     <div class="slider-btn">
-                                        <a
+                                    <a
                                             class="animated"
-                                            href="product-details.html"
-                                            >SHOP NOW</a
+                                            href="{{route('category', [5])}}"
+                                            >За покупками</a
                                         >
                                     </div>
                                 </div>
@@ -65,9 +68,10 @@
                                 <div
                                     class="slider-single-img slider-animated-1"
                                 >
-                                    <img
+                                <img
                                         class="animated"
-                                        src="assets/img/slider/slider-single-img-2.png"
+                                        style="max-width: 400px;"
+                                        src="{{Storage::url('images/7VJpvgAlYFeoUAUYqPeegq5f67gKtP8IUsGDZMoG.jpg')}}"
                                         alt=""
                                     />
                                 </div>
