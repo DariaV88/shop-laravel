@@ -1,5 +1,5 @@
-Видео со стороны обычного пользователя
-https://github.com/user-attachments/assets/cc873c0f-d9c5-4508-ad0d-3f6836be1b80
+Со стороны обычного пользователя
+![Запись экрана 1 (online-video-cutter com) (1)](https://github.com/user-attachments/assets/7548a8e8-343e-49a9-87aa-61b309092e31)
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
