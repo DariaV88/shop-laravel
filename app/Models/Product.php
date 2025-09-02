@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $table = 'products';
     protected $guarded = false;
@@ -29,5 +31,9 @@ class Product extends Model
 
     public function isNew() {
         return $this->new === 1;
+    }
+
+    public function isAvailable() {
+        return  !$this->trashed() && $this->count > 0;
     }
 }

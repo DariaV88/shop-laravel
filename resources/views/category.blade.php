@@ -21,11 +21,22 @@
                                                     <!-- <a title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
                                                         <i class="ti-plus"></i>
                                                     </a> -->
+                                                    @if($product->isAvailable())
                                                     <form action="{{route('basket.add', $product)}}" method="POST">
                                                         @csrf
                                                     <button type="submit" class="btn btn-primary" title="Add To Cart">
                                                         В корзину
                                                     </form>
+                                                    @else 
+                                                    <span>Не доступен</span>
+                                                    <br>
+                                                    <span>Сообщить мне, когда появится в наличии:</span>
+                                                    <form action="{{route('subscription', , $product)}}" method="POST">
+                                                        @csrf
+                                                        <input type="email" name="email" id="">
+                                                        <button type="submit">Отправить</button>
+                                                    </form>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="product-content">

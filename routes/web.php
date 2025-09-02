@@ -23,7 +23,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 |
 */
 
-Route::middleware(['auth', 'is_admin'])->group(function() {
+Route::middleware(['auth'])->group(function() {
    
     Route::group(['prefix' => 'admin'], function() {
 
@@ -53,8 +53,8 @@ Route::middleware(['auth'])->group(function() {
 
 Route::group(['prefix' => 'basket'], function() { 
     Route::get('/', 'App\Http\Controllers\BasketController@basket')->name('basket');
-    Route::post('/add/{id}', 'App\Http\Controllers\BasketController@add')->name('basket.add');
-    Route::post('/remove/{id}', 'App\Http\Controllers\BasketController@remove')->name('basket.remove');
+    Route::post('/add/{product}', 'App\Http\Controllers\BasketController@add')->name('basket.add');
+    Route::post('/remove/{product}', 'App\Http\Controllers\BasketController@remove')->name('basket.remove');
     Route::post('/confirm', 'App\Http\Controllers\BasketController@confirm')->name('basket.confirm');
 });
     
@@ -89,3 +89,6 @@ Route::get('/', 'App\Http\Controllers\MainController@index')->name('index');
 Route::get('/categories', 'App\Http\Controllers\MainController@categories')->name('categories');
 Route::get('/{category}', 'App\Http\Controllers\MainController@category')->name('category');
 Route::get('/{category}/{product}', 'App\Http\Controllers\MainController@product')->name('product');
+
+Route::get('/subscription/{product}', 'App\Http\Controllers\MainController@subscribe')->name('subscription');
+

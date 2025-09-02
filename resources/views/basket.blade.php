@@ -62,7 +62,7 @@
                     <div>
                     <div class="breadcrumb-content text-center">
                     <h2>Checkout</h2>
-                   <p>Укажите имя и номер телефона, чтобы менеджер связался с вами.</p>
+                   <p>Укажите имя, номер телефона и email, чтобы менеджер связался с вами.</p>
             </div>
 
 
@@ -76,7 +76,13 @@
             <div class="form-group">
                 <label for="name">Номер телефона: </label>
                 <div class="col-lg-4">
-                    <input type="text" name="phone" id="phone" class="form-control">
+                    <input type="text" name="phone" id="phone" class="form-control" required>
+                </div>
+            </div>
+                <div class="form-group">
+                <label for="name">Email: </label>
+                <div class="col-lg-4">
+                    <input type="email" name="email" id="email" class="form-control" required>
                 </div>
             </div>
             @csrf

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -49,6 +50,17 @@ class MainController extends Controller
     public function product(Category $category, Product $product) {
         $categories = Category::all();
         return view('product', compact('category', 'product', 'categories'));
+    }
+
+
+    public function subscription(Request $request, Product $product) {
+
+        Subscription::create([
+            'email' => $request->email,
+            'product_id' => $product->id,
+        ]);
+        
+        return redirect()->back()->with('success', 'Спасибо. Мы свяжемся с вами, когда товар снова будет в наличии.');
     }
     
 }

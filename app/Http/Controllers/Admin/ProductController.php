@@ -91,9 +91,7 @@ class ProductController extends Controller {
     $data = $request->validated();
     if ($request->has('preview_image')) {
       $data['preview_image'] = Storage::disk('public')->put('/images', $request['preview_image']);
-      dd($data['preview_image']);
     }
-    dd($data);
     $product->update($data);
     return view('admin.products.show', compact('product'));
   }

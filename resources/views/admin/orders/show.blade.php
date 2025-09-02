@@ -42,12 +42,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($order->products as $product)
+                                        @foreach($products as $product)
                                         <tr>
                                             <td class="product-thumbnail">
                                             <img style="max-width:150px" src="{{Storage::url($product->preview_image)}}" alt="">
                                             </td>
-                                            <td class="product-name">{{$product->title}}</td>
+                                            <td class="product-name">
+                                              {{$product->title}}</td>
                                             <td class="product-price-cart"><span class="amount">${{$product->price}}</span></td>
                                             <td class="product-quantity"><span class="pl-50">{{$product->pivot->count}}</span></td>
                                             <td>{{$product->getTotalPrice()}}</td>

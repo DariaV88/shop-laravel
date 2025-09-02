@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Models\Category;
+use App\Models\Product;
+use App\Observers\productObserver;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,5 +24,7 @@ class AppServiceProvider extends ServiceProvider
      public function boot() {
         $categories = Category::all();
         view()->share('cats', $categories);
+
+        Product::observe(ProductObserver::class);
     }
 }

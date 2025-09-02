@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\OrderCreated;
+use Illuminate\Support\Facades\Mail;
 
 class BasketController extends Controller
 {
@@ -22,22 +25,29 @@ class BasketController extends Controller
         return view('basket', compact('order'));
     }
 
-    public function add($productId) {
+    public function add(Product $product) {
 
         $orderId = session('orderId');
         if (is_null($orderId)) {
             $order = Order::create();
             session(['orderId' => $order->id]);
         } else {
-            $order = Order::find($orderId);
+            $order = Order::findOrFail($orderId);
         }
 
-        if($order->products->contains($productId)) {
-            $pivotRow = $order->products()->where('product_id', $productId)->first()->pivot;
+        if($order->products->contains($product->id)) {
+            $pivotRow = $order->products()->where('product_id', $product->id)->first()->pivot;
             $pivotRow->count++;
+            if($pivotRow->count > $product->count) {
+                return false;
+                // ПОМЕНЯТЬ ФОЛС НА ЧТО-ТО? переброс на пустую страницу + вывести в success отсутсиве в больш. кол-ве
+            }
             $pivotRow->update();
         } else {
-            $order->products()->attach($productId);
+                if($product->count == 0) {
+                return false;
+            }
+            $order->products()->attach($product->id);
         }
 
         if(Auth::check()) {
@@ -50,18 +60,18 @@ class BasketController extends Controller
         return redirect()->route('basket');
     }
 
-    public function remove($productId) {
+    public function remove(Product $product) {
         $orderId = session('orderId');
         
         if (is_null($orderId)) {
           return redirect()->route('basket');
         }
-        $order = Order::find($orderId);
+        $order = Order::findOrFail($orderId);
 
-        if($order->products->contains($productId)) {
-            $pivotRow = $order->products()->where('product_id', $productId)->first()->pivot;
+        if($order->products->contains($product->id)) {
+            $pivotRow = $order->products()->where('product_id', $product->id)->first()->pivot;
             if($pivotRow->count < 2) {
-                $order->products()->detach($productId);
+                $order->products()->detach($product->id);
             } else {
                 $pivotRow->count--;
                 $pivotRow->update();
@@ -78,8 +88,20 @@ class BasketController extends Controller
           return redirect()->route('index');
         }
 
-        $order = Order::find($orderId);
+        $order = Order::findOrFail($orderId);
+
+        foreach ($order->products as $orderProduct) {
+            $orderProduct->count -= $order->products()->where('product_id', $orderProduct->id)->first()->pivot->count;
+        }
+        $order->products->map->save();
+
         $success = $order->saveOrder($request->name, $request->phone);
+        //ДОБАВИТЬ ПОЧТУ?
+
+        $email = Auth::check() ? Auth::user()->email : $request->email;
+        $name = Auth::check() ? Auth::user()->name : $request->name;
+
+        Mail::to($email)->send(new OrderCreated($name));
 
         if($success) {
             session()->flash('success', 'Ваш заказ принят в обработку');
@@ -89,4 +111,5 @@ class BasketController extends Controller
 
         return redirect()->route('index');
     }
+
 }

@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->tinyInteger('is_admin')->default('0');
+        Schema::table('products', function (Blueprint $table) {
+            $table->softDeletes();
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-           $table->dropColumn('is_admin');
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropColumn('deleted_at');
         });
     }
 };
