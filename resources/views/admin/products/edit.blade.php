@@ -58,12 +58,16 @@
           @enderror
           </div>
 
-          <div class="form-group">
-          <label>Коичество на складе</label>
-            <input type="text" name="count" value="{{$product->count}}" class="form-control" placeholder="Количество на складе">
-            @error('count')
+                    <div class="form-group">
+                  <select name="property_id" class="form-control select2" style="width: 100%;">
+                    <option selected="selected" disabled>Выберите свойство</option>
+                    @foreach($properties as $property)
+                    <option value="{{$property->id}}" {{$property->id == old('property_id') ? 'selected' : ''}}>{{$property->name}}</option>
+                    @endforeach
+                  </select>
+                  @error('property_id')
                     <div class="text-danger">{{$message}}</div>
-          @enderror
+                   @enderror
           </div>
 
           <div class="product-img">

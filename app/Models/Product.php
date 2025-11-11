@@ -18,6 +18,15 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
+     public function skus() {
+        return $this->hasMany(Sku::class);
+    }
+
+    public function properties() {
+        return $this->belongsToMany(Property::class, 'property_product')->withTimestamps();
+    }
+
+
     public function getTotalPrice() {
         if(!is_null($this->pivot)) {
             return $this->price * $this->pivot->count;

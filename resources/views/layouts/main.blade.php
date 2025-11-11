@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
-        <title>Магазин</title>
+        <title>LICCHI</title>
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!-- Favicon -->
@@ -12,18 +12,18 @@
             type="image/x-icon"
             href="assets/img/favicon.png"
         />
-
+        
         <!-- all css here -->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="assets/css/animate.css" />
-        <link rel="stylesheet" href="assets/css/simple-line-icons.css" />
-        <link rel="stylesheet" href="assets/css/themify-icons.css" />
-        <link rel="stylesheet" href="assets/css/owl.carousel.min.css" />
-        <link rel="stylesheet" href="assets/css/slick.css" />
-        <link rel="stylesheet" href="assets/css/meanmenu.min.css" />
-        <link rel="stylesheet" href="assets/css/style.css" />
-        <link rel="stylesheet" href="assets/css/responsive.css" />
-        <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css')}}"/>
+        <link rel="stylesheet" href="{{ asset('assets/css/animate.css')}}" />
+        <link rel="stylesheet" href="{{ asset('assets/css/simple-line-icons.css')}}" />
+        <link rel="stylesheet" href="{{ asset('assets/css/themify-icons.css')}}" />
+        <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css')}}" />
+        <link rel="stylesheet" href="{{ asset('assets/css/slick.css')}}" />
+        <link rel="stylesheet" href="{{ asset('assets/css/meanmenu.min.css')}}" />
+        <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}" />
+        <link rel="stylesheet" href="{{ asset('assets/css/responsive.css')}}" />
+        <script src="{{ asset('assets/js/vendor/modernizr-2.8.3.min.js')}}"></script>
     </head>
     <body>
         <header class="header-area">
@@ -32,7 +32,7 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-12">
                             <div class="welcome-area">
-                                <p>Название магазина</p>
+                                <p>LICCHI</p>
                             </div>
                         </div>
                     </div>
@@ -327,6 +327,9 @@
                     @if(session()->has('success'))
        <p class="alert alert-success">{{session()->get('success')}}</p>
        @endif
+                           @if(session()->has('warning'))
+       <p class="alert alert-warning">{{session()->get('warning')}}</p>
+       @endif
                 </div>
             </div>
         </header>
@@ -334,166 +337,98 @@
    @yield('content')
   </div>
 
+<div class="related-product-area pt-95 pb-80 mt-50 white-bg">
+            <div class="container">
+                <div class="section-title text-center mb-55">
+                    <h2>Популярные товары</h2>
+                </div>
+                <div class="related-product-active owl-carousel">
+                    @foreach($bestProducts as $bestProduct)
+
+                    <div class="product-wrapper">
+                        <div class="product-img">
+                            <a href="product-details.html">
+                                <img src="assets/img/product/product-8.jpg" alt="">
+                            </a>
+                            <div class="product-action">
+                                <a title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
+                                    <i class="ti-plus"></i>
+                                </a>
+                                <a title="Add To Cart" href="#">
+                                    <i class="ti-shopping-cart"></i>
+                                </a>
+                            </div>
+                            <div class="product-action-wishlist">
+                                <a title="Wishlist" href="#">
+                                    <i class="ti-heart"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <a href="{{route('product', [$bestProduct->category->id, $bestProduct->id])}}">{{$bestProduct->title}}</a>
+                            
+                            <div class="product-price">
+                                <span class="new">$ {{$bestProduct->price}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
         <footer class="footer-area">
-            <div class="footer-top pt-80 pb-50 gray-bg-2">
+            <div class="footer-top pt-40 pb-30 gray-bg-2">
                 <div class="container">
                     <div class="row">
-                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
                             <div class="footer-widget mb-30">
+                            <h4 class="footer-title text-center">Где мы находимся</h4>
                                 <div class="footer-info-wrapper">
-                                    <div class="footer-logo">
-                                        <a href="#">
-                                            <img
-                                                src="assets/img/logo/logo-2.png"
-                                                alt=""
-                                            />
-                                        </a>
-                                    </div>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, co adipisi
-                                        elit, sed eiusmod tempor incididunt ut
-                                        labore et dolore
-                                    </p>
-                                    <div class="social-icon">
-                                        <ul>
-                                            <li>
-                                                <a href="#"
-                                                    ><i
-                                                        class="icon-social-twitter"
-                                                    ></i
-                                                ></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"
-                                                    ><i
-                                                        class="icon-social-instagram"
-                                                    ></i
-                                                ></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"
-                                                    ><i
-                                                        class="icon-social-linkedin"
-                                                    ></i
-                                                ></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"
-                                                    ><i
-                                                        class="icon-social-skype"
-                                                    ></i
-                                                ></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"
-                                                    ><i
-                                                        class="icon-social-dribbble"
-                                                    ></i
-                                                ></a>
-                                            </li>
-                                        </ul>
-                                    </div>
+
+                                    <div class="service-content text-center mb-30">
+  <div style="position:relative;overflow:hidden; max-width: 400px; margin: 0 auto;">
+    <a href="https://yandex.ru/maps/org/galereya_krasnodar/1492821787/?utm_medium=mapframe&amp;utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Галерея Краснодар</a>
+    <a href="https://yandex.ru/maps/35/krasnodar/category/shopping_mall/184108083/?utm_medium=mapframe&amp;utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:14px;">Торговый центр в Краснодаре</a>
+    <a href="https://yandex.ru/maps/35/krasnodar/category/entertainment_center/184106372/?utm_medium=mapframe&amp;utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:28px;">Развлекательный центр в Краснодаре</a>
+    <iframe src="https://yandex.ru/map-widget/v1/org/galereya_krasnodar/1492821787/?ll=38.974552%2C45.039753&amp;z=14" width="400" height="200" frameborder="1" allowfullscreen="true" style="position:relative;">
+    </iframe>
+  </div>
+</div>
+
+                                
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                             <div class="footer-widget mb-30 pl-50">
-                                <h4 class="footer-title">USEFUL LINKS</h4>
+                            <h4 class="footer-title">Полезная информация</h4>
                                 <div class="footer-content">
                                     <ul>
-                                        <li>
-                                            <a href="#">Help & Contact Us</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Returns & Refunds</a>
-                                        </li>
-                                        <li><a href="#">Online Stores</a></li>
-                                        <li>
-                                            <a href="#">Terms & Conditions</a>
-                                        </li>
+                                        <li><a href="#">Акции</a></li>
+                                        <li><a href="#">Доставка</a></li>
+                                        <li><a href="#">Оплата</a></li>
+                                        <li><a href="#">Возврат</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-3 col-lg-2 col-md-6 col-sm-6">
                             <div class="footer-widget mb-30 pl-70">
-                                <h4 class="footer-title">HELP</h4>
+                            <h4 class="footer-title">Компания</h4>
                                 <div class="footer-content">
                                     <ul>
-                                        <li><a href="#">Faq's </a></li>
-                                        <li><a href="#">Pricing Plans</a></li>
-                                        <li><a href="#">Order Traking</a></li>
-                                        <li><a href="#">Returns </a></li>
+                                        <li>
+                                            <a href="#">О нас</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Вакансии</a>
+                                        </li>
+                                        <li><a href="#">Закупки</a></li>
+                                        <li>
+                                            <a href="#">Стать партнёром</a>
+                                        </li>
                                     </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                            <div class="footer-widget">
-                                <div class="newsletter-wrapper">
-                                    <p>
-                                        Subscribe to our newsletter and get 10%
-                                        off your first purchase..
-                                    </p>
-                                    <div class="newsletter-style">
-                                        <div
-                                            id="mc_embed_signup"
-                                            class="subscribe-form"
-                                        >
-                                            <form
-                                                action="#"
-                                                method="post"
-                                                id="mc-embedded-subscribe-form"
-                                                name="mc-embedded-subscribe-form"
-                                                class="validate"
-                                                target="_blank"
-                                                novalidate
-                                            >
-                                                <div
-                                                    id="mc_embed_signup_scroll"
-                                                    class="mc-form"
-                                                >
-                                                    <input
-                                                        type="email"
-                                                        value=""
-                                                        name="EMAIL"
-                                                        class="email"
-                                                        placeholder="Your mail address"
-                                                        required
-                                                    />
-                                                    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                                                    <div
-                                                        class="mc-news"
-                                                        aria-hidden="true"
-                                                    >
-                                                        <input
-                                                            type="text"
-                                                            name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef"
-                                                            tabindex="-1"
-                                                            value=""
-                                                        />
-                                                    </div>
-                                                    <div class="clear">
-                                                        <input
-                                                            type="submit"
-                                                            value="SEND"
-                                                            name="subscribe"
-                                                            id="mc-embedded-subscribe"
-                                                            class="button"
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="payment-img">
-                                    <a href="index.html">
-                                        <img
-                                            src="assets/img/icon-img/payment.png"
-                                            alt=""
-                                        />
-                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -505,10 +440,6 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="copyright text-center">
-                                <p>
-                                    Copyright © <a href="#">Marten.</a> All
-                                    Right Reserved.
-                                </p>
                             </div>
                         </div>
                     </div>
@@ -517,15 +448,15 @@
         </footer>
 
         <!-- all js here -->
-        <script src="assets/js/vendor/jquery-1.12.0.min.js"></script>
-        <script src="assets/js/popper.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
-        <script src="assets/js/jquery.counterup.min.js"></script>
-        <script src="assets/js/waypoints.min.js"></script>
-        <script src="assets/js/elevetezoom.js"></script>
-        <script src="assets/js/ajax-mail.js"></script>
-        <script src="assets/js/owl.carousel.min.js"></script>
-        <script src="assets/js/plugins.js"></script>
-        <script src="assets/js/main.js"></script>
+        <script src="{{ asset('assets/js/vendor/jquery-1.12.0.min.js')}}"></script>
+        <script src="{{ asset('assets/js/popper.js')}}"></script>
+        <script src="{{ asset('assets/js/bootstrap.min.js')}}"></script>
+        <script src="{{ asset('assets/js/jquery.counterup.min.js')}}"></script>
+        <script src="{{ asset('assets/js/waypoints.min.js')}}"></script>
+        <script src="{{ asset('assets/js/elevetezoom.js')}}"></script>
+        <script src="{{ asset('assets/js/ajax-mail.js')}}"></script>
+        <script src="{{ asset('assets/js/owl.carousel.min.js')}}"></script>
+        <script src="{{ asset('assets/js/plugins.js')}}"></script>
+        <script src="{{ asset('assets/js/main.js')}}"></script>
     </body>
 </html>

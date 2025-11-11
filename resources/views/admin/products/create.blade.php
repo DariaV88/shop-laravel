@@ -56,13 +56,6 @@
           </div>
 
           <div class="form-group">
-            <input type="text" name="count"  value="{{old('count')}}" class="form-control" placeholder="Количество на складе">
-            @error('count')
-                    <div class="text-danger">{{$message}}</div>
-          @enderror
-          </div>
-
-          <div class="form-group">
                     <div class="input-group">
                       <div class="custom-file">
                         <input name="preview_image" type="file" class="custom-file-input" id="exampleInputFile">
@@ -81,6 +74,18 @@
                     @endforeach
                   </select>
                   @error('category_id')
+                    <div class="text-danger">{{$message}}</div>
+                   @enderror
+          </div>
+
+          <div class="form-group">
+                  <select name="property_id" class="form-control select2" style="width: 100%;">
+                    <option selected="selected" disabled>Выберите свойство</option>
+                    @foreach($properties as $property)
+                    <option value="{{$property->id}}" {{$property->id == old('property_id') ? 'selected' : ''}}>{{$property->name}}</option>
+                    @endforeach
+                  </select>
+                  @error('property_id')
                     <div class="text-danger">{{$message}}</div>
                    @enderror
           </div>

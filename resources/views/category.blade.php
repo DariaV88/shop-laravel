@@ -31,7 +31,7 @@
                                                     <span>Не доступен</span>
                                                     <br>
                                                     <span>Сообщить мне, когда появится в наличии:</span>
-                                                    <form action="{{route('subscription', , $product)}}" method="POST">
+                                                    <form action="{{route('subscription', $product)}}" method="POST">
                                                         @csrf
                                                         <input type="email" name="email" id="">
                                                         <button type="submit">Отправить</button>

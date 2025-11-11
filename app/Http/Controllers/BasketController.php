@@ -34,13 +34,13 @@ class BasketController extends Controller
         } else {
             $order = Order::findOrFail($orderId);
         }
-
+         
         if($order->products->contains($product->id)) {
             $pivotRow = $order->products()->where('product_id', $product->id)->first()->pivot;
             $pivotRow->count++;
             if($pivotRow->count > $product->count) {
-                return false;
-                // ПОМЕНЯТЬ ФОЛС НА ЧТО-ТО? переброс на пустую страницу + вывести в success отсутсиве в больш. кол-ве
+                session()->flash('warning', 'Товара в большем количестве нет.');
+                return redirect()->back()->with('error', 'Недостаточно товара на складе.');
             }
             $pivotRow->update();
         } else {

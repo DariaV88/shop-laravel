@@ -56,7 +56,7 @@ class CategoryController extends Controller {
   {
     $data = $request->validated();
     $category->update($data);
-    return view('categories.show', compact('category'));
+    return view('admin.categories.show', compact('category'));
   }
 
 }

@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Товар</h1>
+            <h1 class="m-0">Skus {{$product->title}}</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
+            <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{route('admin.main.index')}}">Главная</a></li>
-            <li class="breadcrumb-item active">Товар</li>
+            <li class="breadcrumb-item active">Skus</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -26,33 +26,33 @@
        <div class="row">
        <div class="col-12">
             <div class="card">
-              <div class="card-header d-flex p-3">
-                <div class="mr-3"><a href="{{route('admin.skus.index', $product)}}" class="btn btn-primary">Skus</a></div>
-                <div class="mr-3"><a href="{{route('admin.products.edit', $product->id)}}" class="btn btn-primary">Редактировать</a></div>
-                <form action="{{route('admin.products.destroy', $product->id)}}" method="post">
-                  @csrf
-                  @method('delete')
-                  <input type="submit" value="Удалить" class="btn btn-danger">
-                </form>
+              <div class="card-header">
+                <a href="{{route('admin.skus.create', $product)}}" class="btn btn-primary">Добавить</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
+              <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
-                    <th>ID</th>
-                      <th>{{$product->id}}</th>
-                    </tr>
-                    <tr>
-                      <th>Наименование</th>
-                      <th>{{$product->title}}</th>
+                      <th>ID</th>
+                      <th>Наименование sku</th>
+                      <th>Количество</th>
                     </tr>
                   </thead>
                   <tbody>
+                  @foreach($skus as $sku)
+                    <tr>
+                      <td>{{$sku->id}}</td>
+                      <td><a href="{{route('admin.skus.show', [$product, $sku])}}">{{$sku->propertyOptions->map->name->implode(',')}}</a></td>
+                      <td>{{$sku->count}}</td>
+                    </tr>
+                    @endforeach
+                  </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
             </div>
+            {!! $skus->links('pagination::bootstrap-4') !!}
             <!-- /.card -->
           </div>
        </div>

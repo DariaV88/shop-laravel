@@ -81,7 +81,8 @@
                 </div>
             </div>
         </div>
-        <div class="service-area bg-img pt-100 pb-65">
+        
+        <div class="service-area bg-img pt-100">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-4 col-md-4">

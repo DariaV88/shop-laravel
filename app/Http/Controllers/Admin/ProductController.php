@@ -11,6 +11,8 @@ use App\Models\ColourProduct;
 use App\Models\Product;
 use App\Models\ProductTag;
 use App\Models\Tag;
+use App\Models\Property;
+use App\Models\Sku;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -21,8 +23,9 @@ class ProductController extends Controller {
     $tags = Tag::all();
     $colours = Colour::all();
     $categories = Category::all();
+    $properties = Property::all();
 
-    return view('admin.products.create', compact('tags', 'colours', 'categories'));
+    return view('admin.products.create', compact('tags', 'colours', 'categories', 'properties'));
   }
 
 
@@ -37,7 +40,9 @@ class ProductController extends Controller {
   {
     $categories = Category::all();
     $tags = Tag::all();
-    return view('admin.products.edit', compact('product', 'categories', 'tags'));
+    $properties = Property::all();
+
+    return view('admin.products.edit', compact('product', 'categories', 'tags', 'properties'));
   }
 
 
@@ -89,10 +94,15 @@ class ProductController extends Controller {
     public function update(UpdateRequest $request, Product $product)
   {
     $data = $request->validated();
+
     if ($request->has('preview_image')) {
       $data['preview_image'] = Storage::disk('public')->put('/images', $request['preview_image']);
     }
+
+    $product->properties()->sync($request->property_id);
+    
     $product->update($data);
+
     return view('admin.products.show', compact('product'));
   }
 }

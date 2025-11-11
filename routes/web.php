@@ -7,6 +7,11 @@ use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\PropertyController;
+use App\Http\Controllers\Admin\PropertyOptionController;
+use App\Http\Controllers\Admin\SkuController;
+
+
 use App\Http\Controllers\User\OrderController as UserOrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +37,9 @@ Route::middleware(['auth'])->group(function() {
     Route::resource('tags', TagController::class)->names('admin.tags');
     Route::resource('users', UserController::class)->names('admin.users');
     Route::resource('products', ProductController::class)->names('admin.products');
+    Route::resource('products/{product}/skus', SkuController::class)->names('admin.skus');
+    Route::resource('properties', PropertyController::class)->names('admin.properties');
+    Route::resource('properties/{property}/property-options', PropertyOptionController::class)->names('admin.property-options');
 
     Route::get('/', IndexController::class)->name('admin.main.index');
     
@@ -90,5 +98,5 @@ Route::get('/categories', 'App\Http\Controllers\MainController@categories')->nam
 Route::get('/{category}', 'App\Http\Controllers\MainController@category')->name('category');
 Route::get('/{category}/{product}', 'App\Http\Controllers\MainController@product')->name('product');
 
-Route::get('/subscription/{product}', 'App\Http\Controllers\MainController@subscribe')->name('subscription');
+Route::post('/subscription/{product}', 'App\Http\Controllers\MainController@subscription')->name('subscription');
 

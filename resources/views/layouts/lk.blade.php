@@ -74,6 +74,13 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{route('admin.main.index')}}" class="nav-link">
+              <p>
+              Кабинет администратора
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

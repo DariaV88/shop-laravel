@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
+use App\Http\Requests\SubscriptionRequest;
 
 class MainController extends Controller
 {
@@ -53,7 +54,7 @@ class MainController extends Controller
     }
 
 
-    public function subscription(Request $request, Product $product) {
+    public function subscription(SubscriptionRequest $request, Product $product) {
 
         Subscription::create([
             'email' => $request->email,

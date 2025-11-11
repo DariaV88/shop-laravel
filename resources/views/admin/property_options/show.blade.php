@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Товар</h1>
+            <h1 class="m-0">Свойства</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
+            <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{route('admin.main.index')}}">Главная</a></li>
-            <li class="breadcrumb-item active">Товар</li>
+            <li class="breadcrumb-item active">Параметры свойства</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -27,9 +27,8 @@
        <div class="col-12">
             <div class="card">
               <div class="card-header d-flex p-3">
-                <div class="mr-3"><a href="{{route('admin.skus.index', $product)}}" class="btn btn-primary">Skus</a></div>
-                <div class="mr-3"><a href="{{route('admin.products.edit', $product->id)}}" class="btn btn-primary">Редактировать</a></div>
-                <form action="{{route('admin.products.destroy', $product->id)}}" method="post">
+                <div class="mr-3"><a href="{{route('admin.property-options.edit', [$property, $propertyOption])}}" class="btn btn-primary">Редактировать</a></div>
+                <form action="{{route('admin.property-options.destroy', [$property, $propertyOption])}}" method="post">
                   @csrf
                   @method('delete')
                   <input type="submit" value="Удалить" class="btn btn-danger">
@@ -41,11 +40,11 @@
                   <thead>
                     <tr>
                     <th>ID</th>
-                      <th>{{$product->id}}</th>
+                      <th>{{$propertyOption->id}}</th>
                     </tr>
                     <tr>
                       <th>Наименование</th>
-                      <th>{{$product->title}}</th>
+                      <th>{{$propertyOption->name}}</th>
                     </tr>
                   </thead>
                   <tbody>

@@ -165,6 +165,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{route('admin.properties.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-bars"></i>
+              <p>
+               Cвойства
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{route('admin.tags.index')}}" class="nav-link">
               <i class="nav-icon fas fa-hashtag"></i>
               <p>

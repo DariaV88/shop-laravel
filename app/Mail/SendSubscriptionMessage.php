@@ -29,7 +29,7 @@ class SendSubscriptionMessage extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Send Subscription Message',
+            subject: 'Товар снова в наличии',
         );
     }
 
@@ -39,7 +39,10 @@ class SendSubscriptionMessage extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'mail.subscription',
+            with: [
+                'product' => $this->product,
+            ],
         );
     }
 
